@@ -1,0 +1,65 @@
+﻿@model BTDatabaseApplicationAppFramework.Models.DDI_Status
+
+@{
+    ViewBag.Title = "Telephone Management System";
+}
+<h2 align="center">@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style type="text/css">
+            body {
+                font-family: Arial;
+                font-size: 10pt;
+            }
+
+            .error {
+                color: red;
+            }
+        </style>
+    </head>
+
+    <body>
+        @using (Html.BeginForm("DDIStatusChanges", "Home", FormMethod.Post))
+        {
+            {@Html.ValidationSummary(true)<fieldset>
+    <legend>Change Response Group Details</legend>
+    <table border="0">
+        @Html.HiddenFor(modelItem => modelItem.DDI_Status_ID, new { @Value = ViewBag.DDI_Status_ID })
+
+        <tr>
+            <td>DDI Status Description: </td>
+            <td>@Html.TextBoxFor(modelItem => modelItem.DDI_Status_Desc, new { style = "width:400px;", @Value = ViewBag.DDI_Status_Desc, @required = "required" })</td>
+            <td>@Html.ValidationMessageFor(model => model.DDI_Status_Desc, "", new { @class = "error" })</td>
+        </tr>
+        <tr>
+            <td><br><br /></td>
+            <td>
+                <input type="button" title="Go Back" value="Go Back" onclick="location.href='@Url.Action("DDIStatusDisplay", "Home")'" )'" />  <input type="submit" name="Add Record" value="Update Record" />
+            </td>
+        </tr>
+    </table>
+
+
+    @{
+        if (TempData["message"] != null)
+        {
+            <div style="color:red">@TempData["message"] </div>
+
+        }
+    }
+
+</fieldset>
+        }
+    }
+
+
+
+
+    </body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    </html>
+

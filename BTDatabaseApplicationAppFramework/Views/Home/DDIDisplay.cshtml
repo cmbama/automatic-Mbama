@@ -1,0 +1,113 @@
+﻿@model PagedList.IPagedList<BTDatabaseApplicationAppFramework.Models.DDI_Details>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{ ViewBag.Title = "DDI Management"; }
+<h2 align="center">@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2></h2>
+    <p></p>
+    <p></p>
+    <p></p>
+    @using (Html.BeginForm("DDIDisplay", "Home", FormMethod.Get))
+    {
+        {@Html.ValidationSummary(true)<fieldset>
+            <table border="0" align="center">
+                <tr>
+                    <td>Enter Puid Or DDI Number: </td>
+                    <td>@Html.TextBox("Search_Data", ViewBag.FilterValue as string, new { style = "width:200px;",  @required = "required" })</td>
+                    <td>&nbsp;<input type="submit" name="Search Record" value="Search Record" /></td>
+
+                </tr>
+            </table>
+        </fieldset>
+    }
+}
+    <h5 style="text-align:left;float:left;">@Html.ActionLink("Add New DDI", "DDIAdd")</h5>
+    <h5 style="text-align:right;float:right; margin-right: 55px;">@Html.ActionLink("Produce DDI Availability Report", "DDIAvaliabilityReport")</h5>
+    <hr style="clear:both;" />
+
+    <table border="1" >
+        <tr>
+            <th style="text-align:center">ID</th>
+            <th style="text-align:center">@Html.ActionLink("DDI Number", "DDIDisplay", new { Sorting_Order = ViewBag.DDI_Number, Filter_Value = ViewBag.FilterValue }) </th>
+            <th style="text-align:center">@Html.ActionLink("DDI Assigned Puid", "DDIDisplay", new { Sorting_Order = ViewBag.DDI_Assigned_To_Puid, Filter_Value = ViewBag.FilterValue })</th>
+            <th style="text-align:center">DDI Assigned Email</th>
+            <th style="text-align:center">@Html.ActionLink("DDI Status", "DDIDisplay", new { Sorting_Order = ViewBag.DDI_Status, Filter_Value = ViewBag.FilterValue })</th>
+            <th style="text-align:center">DDI Last Allocated Date</th>
+            <th style="text-align:center">DDI To Be Vacated Date</th>
+            <th style="text-align:center">DDI Location</th>
+            <th style="text-align:center">DDI Type</th>
+            <th style="text-align:center">Actions</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_ID)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Number)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Assigned_To_Puid)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Email_Address)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Status)
+            </td>
+            <td align="center">             
+                @if ((item.DDI_Last_Allocated_Date.HasValue) || (item.DDI_Last_Allocated_Date != null))
+                {
+                    @item.DDI_Last_Allocated_Date.Value.ToString("dd/MM/yyyy")
+                }
+            </td>
+            <td align="center">
+                @if ((item.DDI_To_Be_Vacated_Date.HasValue) || (item.DDI_To_Be_Vacated_Date != null))
+                {
+                    @item.DDI_To_Be_Vacated_Date.Value.ToString("dd/MM/yyyy")
+                }
+            </td>
+
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Location)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Number_Type)
+            </td>
+            <td align="center">
+                @Html.ActionLink("Moves", "DDIMoves", new { id = item.DDI_ID, DNumber = item.DDI_Number, DAssignedToPuid = item.DDI_Assigned_To_Puid, DEmailAddress = item.DDI_Email_Address, DLastAlloDate = item.DDI_Last_Allocated_Date, DIStatus = item.DDI_Status, DToBeVacatedDate = item.DDI_To_Be_Vacated_Date, DLocation = item.DDI_Location, DNumberType = item.DDI_Number_Type }) |
+                @Html.ActionLink("Changes", "DDIChanges", new { id = item.DDI_ID, DNumber = item.DDI_Number, DAssignedToPuid = item.DDI_Assigned_To_Puid, DEmailAddress = item.DDI_Email_Address, DLastAlloDate = item.DDI_Last_Allocated_Date, DIStatus = item.DDI_Status, DToBeVacatedDate = item.DDI_To_Be_Vacated_Date, DLocation = item.DDI_Location, DNumberType = item.DDI_Number_Type }) |
+                @Html.ActionLink("Delete", "DDIDelete", new { id = item.DDI_ID }, new { onclick = "return confirm('Are you sure you wish to delete record ?');" })
+            </td>
+        </tr>
+        }
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, Page_No =>Url.Action("DDIDisplay",  new { Page_No, Sorting_Order = ViewBag.CurrentSortOrder, Filter_Value = ViewBag.FilterValue }))
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+</html>
+
+

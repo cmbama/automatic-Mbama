@@ -1,0 +1,93 @@
+﻿
+@model BTDatabaseApplicationAppFramework.Models.ViewModelData
+
+@{
+    ViewBag.Title = "Response Group Management";
+}
+<h2 align="center">@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <h2></h2>
+    <p></p>
+    <p></p>
+    <p></p>
+    @using (Html.BeginForm("ResponseGpDisplay", "Home", FormMethod.Post))
+    {
+        {@Html.ValidationSummary(true)<fieldset>
+            <table border="0" align="center">
+                <tr>
+                    <td>Enter Response Group Name or DDI Number: </td>
+                    <td>@Html.TextBoxFor(modelItem => modelItem.SearchNumber, new { style = "width:200px;", @Value = Model.SearchNumber, @required = "required" })</td>
+                    <td>@Html.ValidationMessageFor(model => model.SearchNumber, "", new { @class = "error" })</td>
+                    <td>&nbsp;<input type="submit" name="Search Record" value="Search Record" /></td>
+                </tr>
+            </table>
+        </fieldset>
+    }
+}
+    <p></p>
+    <p></p>
+    <h5 style="text-align:left;float:left; margin-left: 200px;">@Html.ActionLink("Add New Group", "ResponseGpAdd")</h5>
+    <hr style="clear:both;" />
+
+    <table border="1" align="center">
+        <tr>
+
+            <th style="text-align:center">ID</th>
+            <th style="text-align:center">Response Group Name</th>
+            <th style="text-align:center">Response Group Number</th>
+            <th style="text-align:center">Response Group Owner</th>
+            <th style="text-align:center">Response Group Email</th>
+            <th style="text-align:center">Actions</th>
+        </tr>
+
+        @foreach (var item in Model.ResponseGroup)
+        {
+            <tr>
+
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.ResponseGroup_ID)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Response_Group_Name)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Response_Group_DDI_Number)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Response_Group_Owner)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Response_Group_Email)
+                </td>
+
+                <td align="center">
+                    @Html.ActionLink("Changes", "ResponseGpChanges", new { id = item.ResponseGroup_ID, ResponseGroupName = item.Response_Group_Name, ResponseGroupDDINumber = item.Response_Group_DDI_Number, ResponseGroupOwner = item.Response_Group_Owner, ResponseGroupEmail = item.Response_Group_Email }) |
+                    @Html.ActionLink("Delete", "ResponseGpDelete", new { id = item.ResponseGroup_ID, ResponseGroupDDINumber = item.Response_Group_DDI_Number }, new { onclick = "return confirm('Are you sure you wish to delete record?');" })
+                </td>
+            </tr>
+        }
+    </table>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+</html>
+
+
+

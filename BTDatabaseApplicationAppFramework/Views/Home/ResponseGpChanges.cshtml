@@ -1,0 +1,84 @@
+﻿@model BTDatabaseApplicationAppFramework.Models.Response_Group
+
+@{
+    ViewBag.Title = "Telephone Management System";
+}
+<h2 align="center">@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style type="text/css">
+            body {
+                font-family: Arial;
+                font-size: 10pt;
+            }
+
+            .error {
+                color: red;
+            }
+        </style>
+    </head>
+
+    <body>
+        @using (Html.BeginForm("ResponseGpChanges", "Home", FormMethod.Post))
+        {
+            {@Html.ValidationSummary(true)<fieldset>
+                <legend>Change Response Group Details</legend>
+                <table border="0">
+                    @Html.HiddenFor(modelItem => modelItem.ResponseGroup_ID, new { @Value = ViewBag.ResponseGroup_ID })
+
+                    <tr>
+                        <td>Response Group Owner: </td>
+                        <td>@Html.TextBoxFor(modelItem => modelItem.Response_Group_Owner, new { style = "width:400px;", @Value = ViewBag.Response_Group_Owner, @required = "required" })</td>
+                        <td>@Html.ValidationMessageFor(model => model.Response_Group_Owner, "", new { @class = "error" })</td>
+                    </tr>
+                    <tr>
+                        <td>Response Group DDI Number: </td>
+                        <td>@Html.TextBoxFor(modelItem => modelItem.Response_Group_DDI_Number, new { style = "width:400px;", @Value = ViewBag.Response_Group_DDI_Number, @required = "required" })</td>
+                        <td>@Html.ValidationMessageFor(model => model.Response_Group_DDI_Number, "", new { @class = "error" })</td>
+                    </tr>
+                    <tr>
+                        <td>Response Group Email: </td>
+                        <td>@Html.TextBoxFor(modelItem => modelItem.Response_Group_Email, new { style = "width:400px;", @Value = ViewBag.Response_Group_Email, @required = "required" })</td>
+                        <td>@Html.ValidationMessageFor(model => model.Response_Group_Email, "", new { @class = "error" })</td>
+
+                    </tr>
+                    <tr>
+                        <td>Response Group Name: </td>
+                        <td> @Html.TextBoxFor(modelItem => modelItem.Response_Group_Name, new { style = "width:400px;", @Value = ViewBag.Response_Group_Name, @required = "required" , @readonly = "true" })</td>
+                        <td>@Html.ValidationMessageFor(model => model.Response_Group_Name, "", new { @class = "error" })</td>
+                    </tr>
+                    <tr>
+                        <td><br><br /></td>
+                        <td>
+                            <input type="button" title="Go Back" value="Go Back" onclick="location.href='@Url.Action("ResponseGpDisplay", "Home")'" )'" />  <input type="submit" name="Add Record" value="Update Record" />
+                        </td>
+                    </tr>
+                </table>
+
+                <p>@ViewData["AddMessage"] @ViewData["Result"]</p>
+
+                @{
+                    if (ViewData["result"] != null)
+                    {
+                        ViewData["result"] = null;
+                        <script type="text/javascript" language="javascript">
+                            alert("Details saved Successfully");
+                        </script>
+                    }
+                }
+
+            </fieldset>
+        }
+    }
+
+
+
+
+    </body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    </html>
+

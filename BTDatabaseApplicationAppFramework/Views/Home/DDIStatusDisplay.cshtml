@@ -1,0 +1,44 @@
+﻿
+
+@model IEnumerable<BTDatabaseApplicationAppFramework.Models.DDI_Status>
+
+@{
+    ViewBag.Title = "DDI Status Management";
+}
+<h2 align="center">@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<h2></h2>
+
+<p align="center">
+    <h5 style="text-align:left;float:left; margin-left: 425px;">@Html.ActionLink("Add New Status", "DDIStatusAdd")</h5>
+    <hr style="clear:both;" />
+</p>
+
+<table border="1" align="center">
+    <tr>
+        <th style="text-align:center">ID</th>
+        <th style="text-align:center">Status Description</th>
+        <th style="text-align:center">Actions</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Status_ID)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Status_Desc)
+            </td>
+
+            <td align="center">
+                @Html.ActionLink("Changes", "DDIStatusChanges", new { id = item.DDI_Status_ID, StatusDescription = item.DDI_Status_Desc }) |
+                @Html.ActionLink("Delete", "DDIStatusDelete", new { id = item.DDI_Status_ID, StatusDescription = item.DDI_Status_Desc }, new { onclick = "return confirm('Are you sure you wish to delete record?');" })
+            </td>
+        </tr>
+    }
+</table>
+
+
+

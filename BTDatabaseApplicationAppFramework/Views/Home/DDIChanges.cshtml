@@ -1,0 +1,158 @@
+﻿@model BTDatabaseApplicationAppFramework.Models.DDI_Details
+
+@{
+    ViewBag.Title = "Telephone Management System";
+}
+<h2 align="center">@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+
+
+    @section Scripts {
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
+        @Scripts.Render("~/bundles/jqueryui")
+        @Styles.Render("~/Content/cssjqryUi")
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $("#DDI_Last_Allocated_Date").datepicker({
+                    dateFormat: "dd/mm/yy", changeMonth: true, changeYear: true, yearRange: "-60:+0",  showOn: 'button',
+                    buttonText: 'Show date',
+                    buttonImageOnly: true,
+                    buttonImage: 'http://jqueryui.com/resources/demos/datepicker/images/calendar.gif'
+                });
+
+                $(".ui-datepicker-trigger").mouseover(function () {
+                    $(this).css('cursor', 'pointer');
+                });
+
+            });
+        </script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#DDI_To_Be_Vacated_Date").datepicker({
+                    dateFormat: "dd/mm/yy", changeMonth: true, changeYear: true,  showOn: 'button',
+                    buttonText: 'Show date',
+                    buttonImageOnly: true,
+                    buttonImage: 'http://jqueryui.com/resources/demos/datepicker/images/calendar.gif'
+                });
+
+                $(".ui-datepicker-trigger").mouseover(function () {
+                    $(this).css('cursor', 'pointer');
+                });
+
+            });
+        </script>
+    }
+</head>
+
+<body>
+    @using (Html.BeginForm("DDIChanges", "Home", FormMethod.Post))
+    {
+
+        @Html.AntiForgeryToken()
+
+        {@Html.ValidationSummary(true)<fieldset>
+            <legend>Change DDI Details </legend>
+            <table border="0">
+                @Html.HiddenFor(modelItem => modelItem.DDI_ID, new { @Value = ViewBag.DDI_ID })
+                <tr>
+                    <td>DDI Number: </td>
+                    <td>@Html.TextBoxFor(modelItem => modelItem.DDI_Number, new { style = "width:400px;", @Value = ViewBag.DDI_Number, @required = "required", @readonly = "true" })</td>
+                    <td>@Html.ValidationMessageFor(model => model.DDI_Number, "", new { @class = "error" })</td>
+                </tr>
+                <tr>
+                    <td>DDI Assigned To Puid: </td>
+                    <td>@Html.TextBoxFor(modelItem => modelItem.DDI_Assigned_To_Puid, new { style = "width:400px;", @Value = ViewBag.DDI_Assigned_To_Puid,  @required = "required" })</td>
+                    <td>@Html.ValidationMessageFor(model => model.DDI_Assigned_To_Puid, "", new { @class = "error" })</td>
+                </tr>
+                <tr>
+                    <td>DDI Email Address: </td>
+                    <td>@Html.TextBoxFor(modelItem => modelItem.DDI_Email_Address, new { style = "width:400px;", @Value = ViewBag.DDI_Email_Address, @required = "required" })</td>
+                    <td>@Html.ValidationMessageFor(model => model.DDI_Email_Address, "", new { @class = "error" })</td>
+                </tr>
+                <tr>
+                    <td>DDI Status: </td>
+                    <td>@Html.DropDownListFor(model => model.DDI_Status, new SelectList(Model.DDIStatusCollection, "DDI_Status_Desc", "DDI_Status_Desc"), "Select", new { style = "width:400px;", @Value = ViewBag.DDI_Status, @required = "required" })</td>
+                    <td>@Html.ValidationMessageFor(model => model.DDI_Status, "", new { @class = "error" })</td>
+                </tr>
+                <tr>
+                    <td>DDI Last Allocated Date: </td>
+                    <td>@Html.TextBoxFor(modelItem => modelItem.DDI_Last_Allocated_Date, new { style = "width:400px;", id = "DDI_Last_Allocated_Date", @Value = ViewBag.DDI_Last_Allocated_Date, @readonly = "true", @required = "required" })</td>
+                    <td>@Html.ValidationMessageFor(model => model.DDI_Last_Allocated_Date, "", new { @class = "error", id = "modelStatusMessage_DDI_Last_Allocated_Date" })</td>
+                </tr>
+                <tr>
+                    <td>DDI To Be Vacated Date: </td>
+                    <td>@Html.TextBoxFor(modelItem => modelItem.DDI_To_Be_Vacated_Date, new { style = "width:400px;", id = "DDI_To_Be_Vacated_Date", @Value = ViewBag.DDI_To_Be_Vacated_Date, @readonly = "true", @required = "required" })</td>
+                    <td>@Html.ValidationMessageFor(model => model.DDI_To_Be_Vacated_Date, "", new { @class = "error", id = "modelStatusMessage_DDI_To_Be_Vacated_Date" })</td>
+                </tr>
+
+                <tr>
+                    <td>DDI Location: </td>
+                    <td>@Html.DropDownListFor(model => model.DDI_Location, new SelectList(Model.LocationCollection, "Location_Desc", "Location_Desc"), new { style = "width:400px;", @Value = ViewBag.DDI_Location,  @required = "required" })</td>
+                    <td>@Html.ValidationMessageFor(model => model.DDI_Location, "", new { @class = "error" })</td>
+                </tr>
+                <tr>
+                    <td>DDI Number Type: </td>
+                    <td>@Html.DropDownListFor(model => model.DDI_Number_Type, new SelectList(Model.ResponseGrpMemberTypesCollection, "Response_GrpMemberType_Desc", "Response_GrpMemberType_Desc"), "Select", new { style = "width:400px;", @Value = ViewBag.DDI_Number_Type, @required = "required" })</td>
+                    <td>@Html.ValidationMessageFor(model => model.DDI_Number_Type, "", new { @class = "error" })</td>
+                </tr>
+
+                <tr>
+                    <td><br><br /></td>
+                    <td>
+                        <input type="button" title="Go Back" value="Go Back" onclick="location.href='@Url.Action("DDIDisplay", "Home")'" )'" />  <input type="submit" name="Add Record" value="Update Record" OnClick="return ValidateDDIDate();" />
+                    </td>
+                </tr>
+            </table>
+
+
+
+            @{
+                if (TempData["message"] != null)
+                {
+                    <div style="color:red">@TempData["message"] </div>
+                }
+            }
+
+            <p>@ViewData["AddMessage"] @ViewData["Result"]</p>
+
+            @{
+                if (ViewData["result"] != null)
+                {
+                    ViewData["result"] = null;
+                    <script type="text/javascript" language="javascript">
+                        alert("Details saved Successfully");
+                    </script>
+                }
+            }
+
+        </fieldset>
+    }
+}
+
+</body>
+
+@Scripts.Render("~/Scripts/DDIScript.js")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+</html>
+

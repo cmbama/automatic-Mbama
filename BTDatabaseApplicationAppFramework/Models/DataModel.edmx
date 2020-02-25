@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AtlasDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DDI_Details">
+          <Key>
+            <PropertyRef Name="DDI_Number" />
+          </Key>
+          <Property Name="DDI_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DDI_Number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DDI_Status" Type="varchar" MaxLength="50" />
+          <Property Name="DDI_Last_Allocated_Date" Type="datetime2" Precision="7" />
+          <Property Name="DDI_Location" Type="varchar" MaxLength="50" />
+          <Property Name="DDI_Number_Type" Type="varchar" MaxLength="50" />
+          <Property Name="DDI_Assigned_To_Puid" Type="varchar" MaxLength="50" />
+          <Property Name="DDI_To_Be_Vacated_Date" Type="datetime2" Precision="7" />
+          <Property Name="DDI_Email_Address" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="DDI_Status">
+          <Key>
+            <PropertyRef Name="DDI_Status_Desc" />
+          </Key>
+          <Property Name="DDI_Status_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DDI_Status_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DDI_User_Details">
+          <Key>
+            <PropertyRef Name="User_Puid_Name" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_Puid_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_Allocated_DDI_Number" Type="varchar" MaxLength="50" />
+          <Property Name="User_SMTP_Address" Type="varchar" MaxLength="50" />
+          <Property Name="User_Date_DDI_Allocated" Type="datetime2" Precision="7" />
+          <Property Name="User_Location" Type="varchar" MaxLength="50" />
+          <Property Name="User_Overseas_DDI_Number" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="Location_Desc" />
+          </Key>
+          <Property Name="Location_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Location_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Response_Group">
+          <Key>
+            <PropertyRef Name="Response_Group_Name" />
+          </Key>
+          <Property Name="ResponseGroup_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Response_Group_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Response_Group_DDI_Number" Type="varchar" MaxLength="50" />
+          <Property Name="Response_Group_Owner" Type="varchar" MaxLength="50" />
+          <Property Name="Response_Group_Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Response_Group_Members">
+          <Key>
+            <PropertyRef Name="Response_GroupMember_PUID_Name" />
+          </Key>
+          <Property Name="Response_GroupMember_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Response_GroupMember_PUID_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Response_GroupMember_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Response_GroupMember_Type" Type="varchar" MaxLength="50" />
+          <Property Name="Response_GroupMember_Email" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Response_Grp_MemberTypes">
+          <Key>
+            <PropertyRef Name="Response_GrpMemberType_Desc" />
+          </Key>
+          <Property Name="Response_GrpMemberType_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Response_GrpMemberType_Desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Function Name="TelephoneAvailability" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DDIStatus" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="AtlasDatabaseModelStoreContainer">
+          <EntitySet Name="DDI_Details" EntityType="Self.DDI_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DDI_Status" EntityType="Self.DDI_Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DDI_User_Details" EntityType="Self.DDI_User_Details" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Locations" EntityType="Self.Locations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Response_Group" EntityType="Self.Response_Group" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Response_Group_Members" EntityType="Self.Response_Group_Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Response_Grp_MemberTypes" EntityType="Self.Response_Grp_MemberTypes" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AtlasDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DDI_Details">
+          <Key>
+            <PropertyRef Name="DDI_Number" />
+          </Key>
+          <Property Name="DDI_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DDI_Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DDI_Last_Allocated_Date" Type="DateTime" Precision="7" />
+          <Property Name="DDI_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DDI_Number_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DDI_Assigned_To_Puid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DDI_To_Be_Vacated_Date" Type="DateTime" Precision="7" />
+          <Property Name="DDI_Email_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DDI_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="DDI_User_Details">
+          <Key>
+            <PropertyRef Name="User_Puid_Name" />
+          </Key>
+          <Property Name="User_Allocated_DDI_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="User_Puid_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="User_SMTP_Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="User_Date_DDI_Allocated" Type="DateTime" Precision="7" />
+          <Property Name="User_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="User_Overseas_DDI_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Response_Group_Members">
+          <Key>
+            <PropertyRef Name="Response_GroupMember_PUID_Name" />
+          </Key>
+          <Property Name="Response_GroupMember_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Response_GroupMember_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Response_GroupMember_PUID_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Response_GroupMember_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Response_GroupMember_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="AtlasDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DDI_Details" EntityType="Self.DDI_Details" />
+          <EntitySet Name="DDI_User_Details" EntityType="Self.DDI_User_Details" />
+          <EntitySet Name="Response_Group_Members" EntityType="Self.Response_Group_Members" />
+          <EntitySet Name="DDI_Status" EntityType="AtlasDatabaseModel.DDI_Status" />
+          <EntitySet Name="Response_Grp_MemberTypes" EntityType="AtlasDatabaseModel.Response_Grp_MemberTypes" />
+          <EntitySet Name="Locations" EntityType="AtlasDatabaseModel.Locations" />
+          <EntitySet Name="Response_Group" EntityType="AtlasDatabaseModel.Response_Group" />
+          <FunctionImport Name="TelephoneAvailability" ReturnType="Collection(AtlasDatabaseModel.TelephoneAvailability_Result)">
+            <Parameter Name="DDIStatus" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="DDI_Status">
+          <Key>
+            <PropertyRef Name="DDI_Status_Desc" />
+          </Key>
+          <Property Name="DDI_Status_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DDI_Status_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Response_Grp_MemberTypes">
+          <Key>
+            <PropertyRef Name="Response_GrpMemberType_Desc" />
+          </Key>
+          <Property Name="Response_GrpMemberType_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Response_GrpMemberType_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="Location_Desc" />
+          </Key>
+          <Property Name="Location_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Location_Desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Response_Group">
+          <Key>
+            <PropertyRef Name="Response_Group_Name" />
+          </Key>
+          <Property Name="ResponseGroup_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Response_Group_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Response_Group_DDI_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Response_Group_Owner" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Response_Group_Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="TelephoneAvailability_Result">
+          <Property Type="String" Name="DDI_Location" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DDI_Number" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DDI_Status" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Total_DDI_Numbers_Available" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AtlasDatabaseModelStoreContainer" CdmEntityContainer="AtlasDatabaseEntities">
+          <EntitySetMapping Name="DDI_Details">
+            <EntityTypeMapping TypeName="AtlasDatabaseModel.DDI_Details">
+              <MappingFragment StoreEntitySet="DDI_Details">
+                <ScalarProperty Name="DDI_ID" ColumnName="DDI_ID" />
+                <ScalarProperty Name="DDI_Number" ColumnName="DDI_Number" />
+                <ScalarProperty Name="DDI_Status" ColumnName="DDI_Status" />
+                <ScalarProperty Name="DDI_Last_Allocated_Date" ColumnName="DDI_Last_Allocated_Date" />
+                <ScalarProperty Name="DDI_Location" ColumnName="DDI_Location" />
+                <ScalarProperty Name="DDI_Number_Type" ColumnName="DDI_Number_Type" />
+                <ScalarProperty Name="DDI_Assigned_To_Puid" ColumnName="DDI_Assigned_To_Puid" />
+                <ScalarProperty Name="DDI_To_Be_Vacated_Date" ColumnName="DDI_To_Be_Vacated_Date" />
+                <ScalarProperty Name="DDI_Email_Address" ColumnName="DDI_Email_Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DDI_User_Details">
+            <EntityTypeMapping TypeName="AtlasDatabaseModel.DDI_User_Details">
+              <MappingFragment StoreEntitySet="DDI_User_Details">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="User_Allocated_DDI_Number" ColumnName="User_Allocated_DDI_Number" />
+                <ScalarProperty Name="User_Puid_Name" ColumnName="User_Puid_Name" />
+                <ScalarProperty Name="User_SMTP_Address" ColumnName="User_SMTP_Address" />
+                <ScalarProperty Name="User_Date_DDI_Allocated" ColumnName="User_Date_DDI_Allocated" />
+                <ScalarProperty Name="User_Location" ColumnName="User_Location" />
+                <ScalarProperty Name="User_Overseas_DDI_Number" ColumnName="User_Overseas_DDI_Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Response_Group_Members">
+            <EntityTypeMapping TypeName="AtlasDatabaseModel.Response_Group_Members">
+              <MappingFragment StoreEntitySet="Response_Group_Members">
+                <ScalarProperty Name="Response_GroupMember_Type" ColumnName="Response_GroupMember_Type" />
+                <ScalarProperty Name="Response_GroupMember_Email" ColumnName="Response_GroupMember_Email" />
+                <ScalarProperty Name="Response_GroupMember_PUID_Name" ColumnName="Response_GroupMember_PUID_Name" />
+                <ScalarProperty Name="Response_GroupMember_ID" ColumnName="Response_GroupMember_ID" />
+                <ScalarProperty Name="Response_GroupMember_Name" ColumnName="Response_GroupMember_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DDI_Status">
+            <EntityTypeMapping TypeName="AtlasDatabaseModel.DDI_Status">
+              <MappingFragment StoreEntitySet="DDI_Status">
+                <ScalarProperty Name="DDI_Status_Desc" ColumnName="DDI_Status_Desc" />
+                <ScalarProperty Name="DDI_Status_ID" ColumnName="DDI_Status_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Response_Grp_MemberTypes">
+            <EntityTypeMapping TypeName="AtlasDatabaseModel.Response_Grp_MemberTypes">
+              <MappingFragment StoreEntitySet="Response_Grp_MemberTypes">
+                <ScalarProperty Name="Response_GrpMemberType_Desc" ColumnName="Response_GrpMemberType_Desc" />
+                <ScalarProperty Name="Response_GrpMemberType_Id" ColumnName="Response_GrpMemberType_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="AtlasDatabaseModel.Locations">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="Location_Desc" ColumnName="Location_Desc" />
+                <ScalarProperty Name="Location_ID" ColumnName="Location_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Response_Group">
+            <EntityTypeMapping TypeName="AtlasDatabaseModel.Response_Group">
+              <MappingFragment StoreEntitySet="Response_Group">
+                <ScalarProperty Name="Response_Group_Email" ColumnName="Response_Group_Email" />
+                <ScalarProperty Name="Response_Group_Owner" ColumnName="Response_Group_Owner" />
+                <ScalarProperty Name="Response_Group_DDI_Number" ColumnName="Response_Group_DDI_Number" />
+                <ScalarProperty Name="Response_Group_Name" ColumnName="Response_Group_Name" />
+                <ScalarProperty Name="ResponseGroup_ID" ColumnName="ResponseGroup_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="TelephoneAvailability" FunctionName="AtlasDatabaseModel.Store.TelephoneAvailability">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AtlasDatabaseModel.TelephoneAvailability_Result">
+                <ScalarProperty Name="DDI_Location" ColumnName="DDI_Location" />
+                <ScalarProperty Name="DDI_Number" ColumnName="DDI_Number" />
+                <ScalarProperty Name="DDI_Status" ColumnName="DDI_Status" />
+                <ScalarProperty Name="Total_DDI_Numbers_Available" ColumnName="Total_DDI_Numbers_Available" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

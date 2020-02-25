@@ -1,0 +1,75 @@
+﻿@model List<BTDatabaseApplicationAppFramework.Models.DDITotalList>
+
+
+@{
+    ViewBag.Title = "DDI Availability Report";
+}
+<h2 align="center">@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<h2> </h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table align="center" border="1">
+        <tr>
+            <td align="center">DDI Location</td>
+            <td align="center">DDI Number</td>
+            <td align="center">DDI Status</td>
+            <td align="center">Total_DDI_Available</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Location)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Number)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DDI_Status)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Total_DDI_Available)
+            </td>
+        </tr>
+        }
+    </table>  
+    <p>
+    </p>
+    <table align="center">
+        <tr>
+            <td>
+                <input type="button" title="Go Back" value="Go Back" onclick="location.href='@Url.Action("DDIDisplay", "Home")'" )'" />
+            </td>
+        </tr>
+    </table>
+    </body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+</html>
+
+
+
+
+
+
+
+
+

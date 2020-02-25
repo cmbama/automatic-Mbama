@@ -1,0 +1,73 @@
+﻿
+
+@model List<BTDatabaseApplicationAppFramework.Models.ResponseGroupMembersList>
+
+@{
+    ViewBag.Title = "Response Group Member  Report";
+}
+<h2 align="center">@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<h2></h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <table align="center" border="1">
+        <tr>
+            <td align="center">Response GP Member Puid</td>
+            <td align="center">Response GP Member Name</td>
+            <td align="center">Response Gp Member Type</td>
+        </tr>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+     
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Response_GroupMember_PUID_Name)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Response_GroupMember_Name)
+                </td>
+                <td align="center">
+                    @Html.DisplayFor(modelItem => item.Response_GroupMember_Type)
+                </td>
+
+            </tr>
+        }
+    </table>
+
+
+    <p>
+    </p>
+    <table align="center">
+        <tr>
+            <td>
+                <input type="button" title="Go Back" value="Go Back" onclick="location.href='@Url.Action("ResponseGpMemberDisplay", "Home")'" )'" />
+            </td>
+        </tr>
+    </table>
+</body>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+</html>
+
+
+
