@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTDatabaseApplicationAppFramework", "BTDatabaseApplicationAppFramework\BTDatabaseApplicationAppFramework.csproj", "{4E59DABF-4D37-4FF6-BB72-B32EEC144242}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BTDatabaseApplicationAppFramework.Tests", "BTDatabaseApplicationAppFramework.Tests\BTDatabaseApplicationAppFramework.Tests.csproj", "{517220BD-4194-46CF-9948-A971FE1F5CC3}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{92D0163C-443A-4E7E-8E38-DBE6D4152B20}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4E59DABF-4D37-4FF6-BB72-B32EEC144242}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E59DABF-4D37-4FF6-BB72-B32EEC144242}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E59DABF-4D37-4FF6-BB72-B32EEC144242}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E59DABF-4D37-4FF6-BB72-B32EEC144242}.Release|Any CPU.Build.0 = Release|Any CPU
+		{517220BD-4194-46CF-9948-A971FE1F5CC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{517220BD-4194-46CF-9948-A971FE1F5CC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{517220BD-4194-46CF-9948-A971FE1F5CC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{517220BD-4194-46CF-9948-A971FE1F5CC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92D0163C-443A-4E7E-8E38-DBE6D4152B20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92D0163C-443A-4E7E-8E38-DBE6D4152B20}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92D0163C-443A-4E7E-8E38-DBE6D4152B20}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92D0163C-443A-4E7E-8E38-DBE6D4152B20}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BB96E860-828D-45F6-B742-E93C9F2E81F7}
+	EndGlobalSection
+EndGlobal
